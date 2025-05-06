@@ -14,6 +14,8 @@ import com.cristhiang.ecommerce_microservices.productservice.customExceptions.In
 import com.cristhiang.ecommerce_microservices.productservice.customExceptions.InvalidProductDataException;
 import com.cristhiang.ecommerce_microservices.productservice.productMapper.ProductMapper;
 import com.cristhiang.ecommerce_microservices.productservice.productRepository.ProductRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cristhiang.ecommerce_microservices.productservice.productModel.Product;
 
 @Service
@@ -26,6 +28,7 @@ public class ProductService {
         this.productMapper = productMapper;
     }
 
+    @Transactional
     public ProductResponseDTO createProduct(ProductRequestDTO productRequest) {
         validateProductData(productRequest);
         validateProductUniqueness(productRequest.getProductName());
@@ -34,17 +37,20 @@ public class ProductService {
         return productMapper.mapToProductResponseDTO(savedProduct);
     }
 
+    @Transactional(readOnly = true)
     public ProductResponseDTO findProductById(Long productId) {
         Product product = findProductOrThrow(productId);
         return productMapper.mapToProductResponseDTO(product);
     }
 
+    @Transactional(readOnly = true)
     public List<ProductResponseDTO> findAllProducts() {
         return productRepository.findAll().stream()
                 .map(productMapper::mapToProductResponseDTO)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public ProductResponseDTO updateProduct(Long productId, ProductRequestDTO updateRequest) {
         validateProductData(updateRequest);
         Product existingProduct = findProductOrThrow(productId);
@@ -62,6 +68,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void deleteProduct(Long productId) {
         if (!productRepository.existsById(productId)) {
             throw new ProductNotFoundException("Product not found with ID: " + productId);

@@ -8,6 +8,8 @@ import com.cristhiang.ecommerce_microservices.userservice.userMapper.UserMapper;
 import com.cristhiang.ecommerce_microservices.userservice.userModel.User;
 import com.cristhiang.ecommerce_microservices.userservice.userRepository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +24,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
+    @Transactional
     public UserResponseDTO createUser(UserRequestDTO userRequest) {
         validateEmailUniqueness(userRequest.getEmail());
         
@@ -30,17 +33,20 @@ public class UserService {
         return userMapper.mapToUserResponse(savedUser);
     }
 
+    @Transactional(readOnly = true)
     public UserResponseDTO getUserById(Long userId) {
         User user = findUserOrThrow(userId);
         return userMapper.mapToUserResponse(user);
     }
 
+    @Transactional(readOnly = true)
     public List<UserResponseDTO> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::mapToUserResponse)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public UserResponseDTO updateUser(Long userId, UserRequestDTO userRequest) {
         User existingUser = findUserOrThrow(userId);
         
@@ -53,6 +59,7 @@ public class UserService {
         return userMapper.mapToUserResponse(updatedUser);
     }
 
+    @Transactional
     public void deleteUser(Long userId) {
         if (!userRepository.existsById(userId)) {
             throw new UserNotFoundException("User not found with ID: " + userId);
