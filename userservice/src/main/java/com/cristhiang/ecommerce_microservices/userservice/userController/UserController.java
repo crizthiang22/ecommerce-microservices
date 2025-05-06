@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import com.cristhiang.ecommerce_microservices.userservice.userDTO.Request.UserRequestDTO;
 import com.cristhiang.ecommerce_microservices.userservice.userDTO.Response.UserResponseDTO;
 import com.cristhiang.ecommerce_microservices.userservice.userService.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,12 +36,12 @@ public class UserController {
     }
     
     @PostMapping
-    public UserResponseDTO createUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public UserResponseDTO createUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
         return userService.createUser(userRequestDTO);
     }
 
     @PutMapping("/{id}")
-    public UserResponseDTO updateUser(@PathVariable ("id") Long userId, @RequestBody UserRequestDTO userRequestDTO) {
+    public UserResponseDTO updateUser(@PathVariable ("id") Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
         return userService.updateUser(userId, userRequestDTO);
     }
 
