@@ -71,6 +71,9 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
+
+    //TODO: add password management (update, forgot, reset password)
+    
     // Helper methods 
     private User findUserOrThrow(Long userId) {
         return userRepository.findById(userId)
