@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.cristhiang.stockservice.stockmodel.Stock;
 
-public interface stockRepository extends JpaRepository <Stock, Long> {
+public interface StockRepository extends JpaRepository <Stock, Long> {
     List<Stock> findByStatus(String Status);
-    Optional<Stock> findByProductId(String productId);
+    Optional<Stock> findByProductId(Long productId);
+
 }

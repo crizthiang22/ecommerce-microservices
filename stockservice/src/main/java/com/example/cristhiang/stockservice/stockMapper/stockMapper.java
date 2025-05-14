@@ -7,7 +7,7 @@ import com.example.cristhiang.stockservice.stockDTO.Response.StockResponseDTO;
 import com.example.cristhiang.stockservice.stockmodel.Stock;
 
 @Component
-public class stockMapper {
+public class StockMapper {
 
     public Stock mapToStock(StockRequestDTO request) {
         Stock stock = new Stock();
