@@ -45,7 +45,7 @@ public class StockService {
             .map(stockMapper::mapToStockResponse)
             .collect(Collectors.toList());
     }
-    
+
     @Transactional
     public StockResponseDTO updateStock(Long id, StockRequestDTO stockRequest) {
         validateStockData(stockRequest);
@@ -68,7 +68,7 @@ public class StockService {
 
     private void validateStockData(StockRequestDTO stockRequest){
         if (stockRequest.getProductId() == null  || stockRequest.getQuantity() <= 0) {
-            throw new InvalidStockOperationException("Stock can't be created without a product ID and a price of 0 or less");
+            throw new InvalidStockOperationException("Stock can't be created without a product ID and a amount of 0 or less");
             
         }
     }
