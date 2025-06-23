@@ -1,4 +1,4 @@
-package com.cristhiang.ecommerce_microservices.userservice.userController;
+    package com.cristhiang.ecommerce_microservices.userservice.userController;
 
 import java.util.List;
 
@@ -10,7 +10,6 @@ import com.cristhiang.ecommerce_microservices.userservice.userDTO.Response.UserR
 import com.cristhiang.ecommerce_microservices.userservice.userService.UserService;
 
 import jakarta.validation.Valid;
-
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 @RequestMapping("/api/v1/users")
 @Validated
+
+
 public class UserController {
     private final UserService userService;
     
