@@ -20,5 +20,15 @@ spring:
         format_sql: true
   
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${spring.application.name}-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+    producer:
+      acks: all
+      retries: 3
+      
   main:
     web-application-type: servlet
