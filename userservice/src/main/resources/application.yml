@@ -32,3 +32,13 @@ spring:
       
   main:
     web-application-type: servlet
+
+# Kafka Topic Configuration
+kafka:
+  topic:
+    user-created: user-created-events
+    user-updated: user-updated-events
+    user-deleted: user-deleted-events
+    user-login: user-login-events
+    user-events-dlq: user-events-dlq
+    user-test-events: user-test-events
